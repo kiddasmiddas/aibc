@@ -22,10 +22,22 @@ const STEPS = [
 
 const PRICING = [
   {
+    name: "Free",
+    price: "0",
+    period: "",
+    models: ["GPT-4o Mini", "DeepSeek V3", "Gemini 2.5 Flash"],
+    imageModels: ["DALL-E 2"],
+    features: ["10 000 токенов/день", "3 изображения/день", "5 проектов"],
+    cta: "Начать бесплатно",
+    popular: false,
+  },
+  {
     name: "Basic",
     price: "990",
     period: "/мес",
-    features: ["50 000 токенов/день", "10 изображений/день", "Все агенты", "Email-поддержка"],
+    models: ["GPT-5 Mini", "Claude Opus 4", "Claude Sonnet 4", "DeepSeek V3"],
+    imageModels: ["DALL-E 2", "DALL-E 3"],
+    features: ["50 000 токенов/день", "10 изображений/день", "15 проектов"],
     cta: "Попробовать",
     popular: false,
   },
@@ -33,7 +45,9 @@ const PRICING = [
     name: "Pro",
     price: "2 490",
     period: "/мес",
-    features: ["200 000 токенов/день", "50 изображений/день", "Все агенты", "Приоритетная поддержка", "Свой домен"],
+    models: ["GPT-5.2", "Claude Opus 4.5", "Claude Sonnet 4.5", "Gemini 2.5 Pro", "DeepSeek V3"],
+    imageModels: ["DALL-E 3", "GPT Image 1"],
+    features: ["200 000 токенов/день", "50 изображений/день", "50 проектов", "Свой домен"],
     cta: "Выбрать Pro",
     popular: true,
   },
@@ -41,7 +55,9 @@ const PRICING = [
     name: "Ultra",
     price: "4 990",
     period: "/мес",
-    features: ["500 000 токенов/день", "200 изображений/день", "Все агенты", "Персональный менеджер", "API-доступ", "White label"],
+    models: ["GPT-5.4", "Claude Opus 4.6", "Claude Sonnet 4.6", "DeepSeek V3.2 Thinking", "Gemini 3 Pro"],
+    imageModels: ["DALL-E 3", "GPT Image 1"],
+    features: ["500 000 токенов/день", "200 изображений/день", "200 проектов", "API-доступ", "White label"],
     cta: "Выбрать Ultra",
     popular: false,
   },
@@ -58,7 +74,7 @@ const FAQ_ITEMS = [
   { q: "Нужны ли технические знания?", a: "Нет. Вы описываете задачу обычным языком, а агент выполняет всю техническую работу. Это как переписка с экспертом." },
   { q: "Могу ли я подключить свой домен?", a: "Да, на тарифах Pro и Ultra можно привязать собственный домен к сгенерированному сайту." },
   { q: "Как работает бесплатный тариф?", a: "Бесплатный тариф включает 10 000 токенов в день и 3 изображения. Этого достаточно, чтобы попробовать платформу и создать первый проект." },
-  { q: "Какие LLM используются?", a: "Платформа поддерживает несколько провайдеров: OpenAI, Anthropic, GigaChat, YandexGPT. Вы можете выбрать оптимальный в настройках." },
+  { q: "Какие LLM используются?", a: "Платформа поддерживает несколько провайдеров: OpenAI (GPT-4.1, o3), Anthropic (Claude Opus 4), Google (Gemini 2.5 Pro), DeepSeek. Набор моделей зависит от вашего тарифа." },
   { q: "Можно ли экспортировать результаты?", a: "Да. Сайты скачиваются в виде HTML/ZIP, тексты и планы доступны для копирования, а отчёты экспортируются в популярных форматах." },
 ];
 
@@ -72,7 +88,7 @@ export default function LandingPage() {
             <span className="flex h-9 w-9 items-center justify-center rounded-btn bg-accent text-lg font-bold text-white">
               A
             </span>
-            <span className="text-lg font-bold text-foreground">AIBC</span>
+            <span className="text-lg font-bold text-foreground tracking-tight">AIBC</span>
           </div>
           <div className="hidden sm:flex items-center gap-6 text-sm text-foreground/60">
             <a href="#how" className="hover:text-foreground transition-colors">Как это работает</a>
@@ -91,10 +107,10 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative mx-auto max-w-6xl px-6 py-24 text-center lg:py-32 overflow-hidden">
-        {/* Gradient blobs */}
         <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-indigo-200/60 to-purple-200/40 blur-[100px] pointer-events-none" />
         <div className="absolute -top-20 right-0 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-pink-200/50 to-orange-100/40 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-1/3 w-[350px] h-[350px] rounded-full bg-gradient-to-br from-blue-200/40 to-cyan-100/30 blur-[100px] pointer-events-none" />
+
         <Reveal direction="up">
           <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
             Платформа для предпринимателей
@@ -129,7 +145,6 @@ export default function LandingPage() {
           </div>
         </Reveal>
 
-        {/* Stats */}
         <Reveal direction="up" delay={100}>
           <div className="mt-20 grid grid-cols-3 gap-8 border-t border-border pt-10">
             {[
@@ -152,9 +167,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <div className="mb-16 text-center">
-              <h2 className="mb-3 text-3xl font-bold text-foreground">
-                Как это работает
-              </h2>
+              <h2 className="mb-3 text-3xl font-bold text-foreground">Как это работает</h2>
               <p className="text-foreground/50">Три шага от идеи до запуска</p>
             </div>
           </Reveal>
@@ -162,16 +175,12 @@ export default function LandingPage() {
             {STEPS.map((step) => (
               <div
                 key={step.num}
-                className="rounded-card bg-white p-8 shadow-card hover:shadow-card-hover transition-all duration-150 h-full"
+                className="h-full rounded-card bg-white p-8 shadow-card hover:shadow-card-hover transition-all duration-150"
               >
                 <span className="mb-4 inline-block text-4xl">{step.icon}</span>
                 <p className="mb-2 text-xs font-bold text-accent">{step.num}</p>
-                <h3 className="mb-2 text-xl font-semibold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="text-foreground/50 leading-relaxed">
-                  {step.desc}
-                </p>
+                <h3 className="mb-2 text-xl font-semibold text-foreground">{step.title}</h3>
+                <p className="text-foreground/50 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </RevealGroup>
@@ -184,26 +193,18 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <div className="mb-16 text-center">
-              <h2 className="mb-3 text-3xl font-bold text-foreground">
-                Ваша AI-команда
-              </h2>
-              <p className="text-foreground/50">
-                Каждый агент — специалист в своей области
-              </p>
+              <h2 className="mb-3 text-3xl font-bold text-foreground">Ваша AI-команда</h2>
+              <p className="text-foreground/50">Каждый агент — специалист в своей области</p>
             </div>
           </Reveal>
           <RevealGroup stagger={80} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {AGENTS.map((agent) => (
               <div
                 key={agent.name}
-                className="group rounded-card border border-border bg-white p-6 hover:border-accent/40 hover:shadow-card-hover hover:scale-[1.02] transition-all duration-150"
+                className="h-full group rounded-card border border-border bg-white p-6 hover:border-accent/40 hover:shadow-card-hover hover:scale-[1.02] transition-all duration-150"
               >
-                <span className="mb-3 inline-block text-3xl group-hover:scale-110 transition-transform">
-                  {agent.icon}
-                </span>
-                <h3 className="mb-1 font-semibold text-foreground">
-                  {agent.name}
-                </h3>
+                <span className="mb-3 inline-block text-3xl group-hover:scale-110 transition-transform">{agent.icon}</span>
+                <h3 className="mb-1 font-semibold text-foreground">{agent.name}</h3>
                 <p className="text-sm text-foreground/50">{agent.desc}</p>
               </div>
             ))}
@@ -219,16 +220,14 @@ export default function LandingPage() {
           <Reveal>
             <div className="mb-16 text-center">
               <h2 className="mb-3 text-3xl font-bold text-foreground">Тарифы</h2>
-              <p className="text-foreground/50">
-                Начните бесплатно, масштабируйтесь когда будете готовы
-              </p>
+              <p className="text-foreground/50">Начните бесплатно, масштабируйтесь когда будете готовы</p>
             </div>
           </Reveal>
-          <RevealGroup stagger={150} className="grid gap-6 md:grid-cols-3">
+          <RevealGroup stagger={120} className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {PRICING.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative rounded-card bg-white p-8 transition-all duration-150 ${
+                className={`relative h-full rounded-card bg-white p-6 transition-all duration-150 ${
                   plan.popular
                     ? "border-2 border-accent shadow-card-hover scale-[1.02]"
                     : "border border-border shadow-card hover:shadow-card-hover"
@@ -239,26 +238,47 @@ export default function LandingPage() {
                     Популярный
                   </span>
                 )}
-                <h3 className="mb-1 text-xl font-bold text-foreground">
-                  {plan.name}
-                </h3>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-foreground">
-                    {plan.price}
-                  </span>
-                  <span className="text-foreground/40"> ₽{plan.period}</span>
+                <h3 className="mb-1 text-lg font-bold text-foreground">{plan.name}</h3>
+                <div className="mb-4">
+                  <span className="text-3xl font-bold text-foreground">{plan.price}</span>
+                  {plan.period && <span className="text-foreground/40"> ₽{plan.period}</span>}
+                  {!plan.period && <span className="text-foreground/40"> ₽</span>}
                 </div>
-                <ul className="mb-8 space-y-3">
+
+                {/* Features */}
+                <ul className="mb-4 space-y-2">
                   {plan.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-center gap-2 text-sm text-foreground/70"
-                    >
+                    <li key={f} className="flex items-center gap-2 text-sm text-foreground/70">
                       <span className="text-green-500">✓</span>
                       {f}
                     </li>
                   ))}
                 </ul>
+
+                {/* AI Models */}
+                <div className="mb-4 border-t border-border pt-3">
+                  <p className="text-xs font-semibold text-foreground/40 uppercase tracking-wide mb-2">AI-модели</p>
+                  <div className="flex flex-wrap gap-1">
+                    {plan.models.map((m) => (
+                      <span key={m} className="inline-block rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Image Models */}
+                <div className="mb-5 border-t border-border pt-3">
+                  <p className="text-xs font-semibold text-foreground/40 uppercase tracking-wide mb-2">Генерация изображений</p>
+                  <div className="flex flex-wrap gap-1">
+                    {plan.imageModels.map((m) => (
+                      <span key={m} className="inline-block rounded-full bg-pink-100 px-2 py-0.5 text-[10px] font-medium text-pink-600">
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
                 <Link
                   href="/login"
                   className={`block w-full rounded-btn py-3 text-center text-sm font-semibold transition-colors ${
@@ -272,14 +292,6 @@ export default function LandingPage() {
               </div>
             ))}
           </RevealGroup>
-          <Reveal delay={200}>
-            <p className="mt-8 text-center text-sm text-foreground/40">
-              Бесплатный тариф: 10 000 токенов/день, 3 изображения.{" "}
-              <Link href="/login" className="text-accent hover:underline">
-                Попробовать бесплатно
-              </Link>
-            </p>
-          </Reveal>
         </div>
       </section>
 
@@ -288,20 +300,16 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <div className="mb-16 text-center">
-              <h2 className="mb-3 text-3xl font-bold text-foreground">
-                Что говорят пользователи
-              </h2>
+              <h2 className="mb-3 text-3xl font-bold text-foreground">Что говорят пользователи</h2>
             </div>
           </Reveal>
           <RevealGroup stagger={150} className="grid gap-6 md:grid-cols-3">
             {TESTIMONIALS.map((t) => (
               <div
                 key={t.name}
-                className="rounded-card border border-border bg-white p-6 shadow-card"
+                className="h-full rounded-card border border-border bg-white p-6 shadow-card"
               >
-                <p className="mb-4 text-foreground/70 leading-relaxed">
-                  &ldquo;{t.text}&rdquo;
-                </p>
+                <p className="mb-4 text-foreground/70 leading-relaxed">&ldquo;{t.text}&rdquo;</p>
                 <div>
                   <p className="font-semibold text-foreground">{t.name}</p>
                   <p className="text-sm text-foreground/40">{t.role}</p>
@@ -317,9 +325,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-3xl px-6">
           <Reveal>
             <div className="mb-16 text-center">
-              <h2 className="mb-3 text-3xl font-bold text-foreground">
-                Частые вопросы
-              </h2>
+              <h2 className="mb-3 text-3xl font-bold text-foreground">Частые вопросы</h2>
             </div>
           </Reveal>
           <RevealGroup stagger={100} className="space-y-3">
@@ -335,9 +341,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-gradient-soft opacity-60 pointer-events-none" />
         <div className="relative mx-auto max-w-3xl px-6 text-center">
           <Reveal direction="scale">
-            <h2 className="mb-4 text-3xl font-bold text-foreground">
-              Готовы начать?
-            </h2>
+            <h2 className="mb-4 text-3xl font-bold text-foreground">Готовы начать?</h2>
             <p className="mb-8 text-foreground/50">
               Создайте бесплатный аккаунт и соберите свою AI-команду за 5 минут
             </p>
@@ -363,9 +367,7 @@ export default function LandingPage() {
                   </span>
                   <span className="font-bold text-foreground">AIBC</span>
                 </div>
-                <p className="text-sm text-foreground/40">
-                  AI-платформа для предпринимателей
-                </p>
+                <p className="text-sm text-foreground/40">AI-платформа для предпринимателей</p>
               </div>
               <div>
                 <h4 className="mb-3 text-sm font-semibold text-foreground">Продукт</h4>
@@ -410,11 +412,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
         className="flex w-full items-center justify-between px-6 py-4 text-left"
       >
         <span className="font-medium text-foreground">{question}</span>
-        <span
-          className={`text-foreground/40 transition-transform duration-200 text-xl leading-none ${
-            open ? "rotate-45" : ""
-          }`}
-        >
+        <span className={`text-foreground/40 transition-transform duration-200 text-xl leading-none ${open ? "rotate-45" : ""}`}>
           +
         </span>
       </button>

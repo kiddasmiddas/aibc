@@ -76,7 +76,7 @@ export default function AgentChatPage() {
     const [projRes, histRes, modelsRes] = await Promise.all([
       api.get<Project>(`/projects/${projectId}`),
       api.get<ChatHistoryResponse>(`/projects/${projectId}/agents/${agentType}/chat?limit=50&offset=0`),
-      api.get<{ id: string; name: string; provider: string; description: string }[]>("/models"),
+      api.get<{ id: string; name: string; provider: string; description: string }[]>(`/models?agent_type=${agentType}`),
     ]);
     if (projRes.data) {
       setProject(projRes.data);

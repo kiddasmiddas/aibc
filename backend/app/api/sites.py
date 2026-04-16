@@ -43,4 +43,11 @@ async def serve_site(
     html = await get_site(project_id)
     if html is None:
         return HTMLResponse(NO_SITE_HTML)
-    return HTMLResponse(html)
+    return HTMLResponse(
+        html,
+        headers={
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        },
+    )
